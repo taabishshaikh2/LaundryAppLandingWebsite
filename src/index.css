@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: #2f4b7c;
+    color: #f7f2e7;
+  }
+
+  a,
+  button {
+    outline-offset: 3px;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #2f4b7c;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* A service card shaped like a garment tag: rounded body with a punched
+     hole near the top, echoing the little care tags sewn into clothing. */
+  .tag-card {
+    position: relative;
+    background: #fffdf8;
+    border: 1px solid rgba(27, 42, 74, 0.08);
+  }
+
+  .tag-card::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 28px;
+    width: 18px;
+    height: 18px;
+    background: #f7f2e7;
+    border: 1px solid rgba(27, 42, 74, 0.12);
+    border-radius: 9999px;
+  }
+
+  /* The rope that steps hang from in the "How it works" section. */
+  .clothesline {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(203, 187, 156, 0.9),
+      rgba(203, 187, 156, 0.9) 10px,
+      rgba(203, 187, 156, 0.4) 10px,
+      rgba(203, 187, 156, 0.4) 14px
+    );
+  }
+
+  .clothesline-vertical {
+    background-image: repeating-linear-gradient(
+      180deg,
+      rgba(203, 187, 156, 0.9),
+      rgba(203, 187, 156, 0.9) 10px,
+      rgba(203, 187, 156, 0.4) 10px,
+      rgba(203, 187, 156, 0.4) 14px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
