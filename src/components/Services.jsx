@@ -1,44 +1,17 @@
-import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import { getIcon } from "./icons";
-import { SERVICES } from "../config/siteConfig";
-
+import { SERVICES, SECTION_COPY, WEBAPP_URL, UI } from "../config/siteConfig";
 export default function Services() {
-  return (
-    <section id="services" className="py-20 md:py-28">
-      <div className="mx-auto max-w-content px-6">
-        <div className="max-w-lg">
-          <h2 className="font-display text-3xl text-ink sm:text-4xl">
-            One booking, every kind of care
-          </h2>
-          <p className="mt-4 text-ink/65 leading-relaxed">
-            Send one garment or a full week's wash — mix and match services
-            in a single pickup. Pricing lives in the app, so this list stays
-            simple.
-          </p>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service) => {
-            const Icon = getIcon(service.icon);
-            return (
-              <div
-                key={service.id}
-                className="tag-card rounded-2xl px-6 py-7 shadow-[0_1px_2px_rgba(27,42,74,0.04)]"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-indigo/10 text-indigo">
-                  <Icon size={20} strokeWidth={1.75} />
-                </div>
-                <h3 className="mt-5 font-display text-xl text-ink">
-                  {service.name}
-                </h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink/60">
-                  {service.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
+  const copy = SECTION_COPY.services;
+  return <section id="services" className="section shell">
+    <div className="section-heading"><div><p className="eyebrow">{copy.eyebrow}</p><h2>{copy.title}<em>{copy.emphasis}</em></h2></div><p className="section-description">{copy.description}</p></div>
+    <div className="service-grid">{SERVICES.map((service, i) => {
+      const Icon = getIcon(service.icon);
+      return <article className={`service-card ${i === 6 ? "service-card--premium" : ""}`} key={service.id}>
+        <div className="service-top"><span className="service-icon"><Icon size={25} strokeWidth={1.4} aria-hidden="true" /></span><span className="tag-hole" aria-hidden="true" /></div>
+        <span className="service-label">{service.tag}</span><h3>{service.name}</h3><p>{service.description}</p>
+        <a href={WEBAPP_URL} className="service-link" aria-label={`${UI.book}: ${service.name}`}><ArrowUpRight size={20} aria-hidden="true" /></a>
+      </article>;
+    })}<a href={WEBAPP_URL} className="service-note"><span className="note-mark" aria-hidden="true">✳</span><p>{copy.note}</p><span>{UI.explore}<ArrowUpRight size={17} aria-hidden="true" /></span></a></div>
+  </section>;
 }
